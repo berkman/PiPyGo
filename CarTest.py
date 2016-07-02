@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from Car import Car
+from classes.car import Car
 
 my_car = Car()
 

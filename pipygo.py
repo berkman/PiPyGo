@@ -2,26 +2,27 @@ import os, os.path
 import random
 import string
 
-import Car
+from classes.car import Car
 
 import cherrypy
 
-class piWheels(object):
-   @cherrypy.expose
-   def index(self):
-       return open('index.html')
+class PiPyGo(object):
+    @cherrypy.expose
+    def index(self):
+        return open('index.html')
 
-class piWheelsWebService(object):
+class PiPyGoWebService(object):
     exposed = True
+    my_car = Car()
 
     @cherrypy.tools.accept(media='text/plain')
     def GET(self):
-        return cherrypy.session['mystring']
+        #return cherrypy.session['mystring']
+        return my_car.get_steering_direction()
 
-    def POST(self, length=8):
-        some_string = ''.join(random.sample(string.hexdigits, int(length)))
-        cherrypy.session['mystring'] = some_string
-        return some_string
+    def POST(self, steering_directon):
+        cherrypy.session['steering_directon'] = steering_direction
+        return ""
 
 if __name__ == '__main__':
     conf = {
@@ -39,6 +40,6 @@ if __name__ == '__main__':
             'tools.staticdir.dir': './public'
         }
     }
-    webapp = piWheels()
-    webapp.generator = piWheelsWebService()
+    webapp = PiPyGo()
+    webapp.generator = PiPyGoWebService()
     cherrypy.quickstart(webapp, '/', conf)
