@@ -1,21 +1,35 @@
 $(document).ready(function() {
-  $("#up").click(function(e) {
-    $.post("/generator", {"length": $("input[name='length']").val()})
-     .done(function(string) {
-          alert("Up!");
-     });
-    e.preventDefault();
-  });
+  $("#up")
+    .mousedown(function() {
+      $("#status").val("UP");
+    })
+    .mouseup(function() {
+      $("#status").val("");
+    });
 
-  $("#left").click(function(e) {
-    alert("Left!")
-  });
+  $("#left")
+    .mousedown(function() {
+      $("#status").val("LEFT");
+    })
+    .mouseup(function() {
+      $("#status").val("");
+    });
 
-  $("#right").click(function(e) {
-    alert("Right!")
-  });
+  $("#right")
+    .mousedown(function() {
+      $("#status").val("RIGHT");
+    })
+    .mouseup(function() {
+      $("#status").val("");
+    });
 
-  $("#down").click(function(e) {
-    alert("Down!")
-  });
+  $("#down")
+    .mousedown(function() {
+      $("#status").val("DOWN");
+    })
+    .mouseup(function() {
+      $("#status").val("");
+    });
 });
+
+//on RELEASE VS ON CLICK?
