@@ -33,7 +33,7 @@ $(document).ready(function() {
 });
 
 /*
-$.post("/generator", {"length": $("input[name='length']").val()})
+$.post("/command", {"length": $("input[name='length']").val()})
  .done(function(string) {
     $("#the-string").show();
     $("#the-string input").val(string);

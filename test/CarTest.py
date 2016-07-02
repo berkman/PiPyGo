@@ -2,7 +2,6 @@
 
 from Car import Car
 
-
 my_car = Car()
 
 my_car.set_motor_speed('HIGH')
@@ -12,4 +11,4 @@ print my_car.get_motor_speed()
 print my_car.get_steering_direction()
 
 print my_car.get_pedal_engaged()
-print my_car.get_steering_engaged()
+#print my_car.get_steering_engaged()
