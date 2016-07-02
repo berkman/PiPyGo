@@ -32,4 +32,11 @@ $(document).ready(function() {
     });
 });
 
-//on RELEASE VS ON CLICK?
+/*
+$.post("/generator", {"length": $("input[name='length']").val()})
+ .done(function(string) {
+    $("#the-string").show();
+    $("#the-string input").val(string);
+ });
+e.preventDefault();
+*/
