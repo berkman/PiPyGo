@@ -1,2 +1,2 @@
-# piWheels
-Power Wheels controlled via Raspberry Pi
+# PiPyGo
+Power Wheels / RC car controlled via Raspberry Pi and Python
