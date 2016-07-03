@@ -1,18 +1,27 @@
 $(document).ready(function() {
   $("#up")
     .mousedown(function() {
-      $("#status").val("UP");
+      $("#motor_direction").val("FORWARD");
     })
     .mouseup(function() {
-      $("#status").val("");
+      $("#motor_direction").val("NONE");
     });
 
+  $("#down")
+    .mousedown(function() {
+      $("#motor_direction").val("REVERSE");
+    })
+    .mouseup(function() {
+      $("#motor_direction").val("NONE");
+    });
+
+/*
   $("#left")
     .mousedown(function() {
       $("#status").val("LEFT");
     })
     .mouseup(function() {
-      $("#status").val("");
+      $("#status").val("CENTER");
     });
 
   $("#right")
@@ -20,16 +29,32 @@ $(document).ready(function() {
       $("#status").val("RIGHT");
     })
     .mouseup(function() {
-      $("#status").val("");
+      $("#status").val("CENTER");
     });
 
-  $("#down")
-    .mousedown(function() {
-      $("#status").val("DOWN");
-    })
-    .mouseup(function() {
-      $("#status").val("");
+    $(document).keydown(function(e) {
+      switch(e.which) {
+          case 37: // left
+          $("#status").val("LEFT");
+          break;
+
+          case 38: // up
+          $("#status").val("UP");
+          break;
+
+          case 39: // right
+          $("#status").val("RIGHT");
+          break;
+
+          case 40: // down
+          $("#status").val("DOWN");
+          break;
+
+          default: return; // exit this handler for other keys
+      }
+      e.preventDefault(); // prevent the default action (scroll / move caret)
     });
+  */
 });
 
 /*

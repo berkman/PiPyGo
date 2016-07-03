@@ -1,26 +1,26 @@
 class Car(object):
 	steering_direction = None
-	motor_speed = None
-	pedal_engaged = False
-	steering_engaged = False
+	motor_direction = None
+	#pedal_engaged = False
+	#steering_engaged = False
 
-	STEERING_DIRECTIONS = ['CENTER', 'LEFT', 'RIGHT']
-	MOTOR_SPEEDS = ['LOW', 'HIGH', 'REVERSE']
+	STEERING_DIRECTIONS = ['LEFT', 'RIGHT', 'NONE']
+	MOTOR_DIRECTIONS = ['FORWARD', 'REVERSE', 'NONE']
 	#CAMERA_STATES = ['OFF', 'STREAM', 'PICTURE', 'VIDEO']
 	#MUSIC_STATES = ['OFF', 'ON']
 
-	def __init__(self, steering_direction='CENTER', motor_speed='LOW'):
+	def __init__(self, steering_direction='NONE', motor_direction='NONE'):
 		self.steering_direction = steering_direction
-		self.motor_speed = motor_speed
+		self.motor_direction = motor_direction
 
 	def get_steering_direction(self):
 		return self.steering_direction
 
-	def get_motor_speed(self):
-		return self.motor_speed
+	def get_motor_direction(self):
+		return self.motor_direction
 
-	def get_pedal_engaged(self):
-		return self.pedal_engaged
+	#def get_pedal_engaged(self):
+	#	return self.pedal_engaged
 
 	#def get_steering_engaged(self):
 	#	return self.steering_engaged
@@ -31,14 +31,14 @@ class Car(object):
 		else:
 			raise ValueError('Invalid Steering Direction')
 
-	def set_motor_speed(self, motor_speed):
-		if motor_speed in self.MOTOR_SPEEDS:
-			self.motor_speed = motor_speed
+	def set_motor_direction(self, motor_direction):
+		if motor_direction in self.MOTOR_DIRECTIONS:
+			self.motor_direction = motor_direction
 		else:
-			raise ValueError('Invalid Motor Speed')
+			raise ValueError('Invalid Motor Direction')
 
-	def set_pedal_engaged(self, pedal_engaged):
-		self.pedal_engaged = pedal_engaged
+	#def set_pedal_engaged(self, pedal_engaged):
+	#	self.pedal_engaged = pedal_engaged
 
 	#def set_steering_engaged(self, steering_engaged):
 	#	self.steering_engaged = steering_engaged

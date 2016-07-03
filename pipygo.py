@@ -17,12 +17,12 @@ class PiPyGoWebService(object):
 
     @cherrypy.tools.accept(media='text/plain')
     def GET(self):
-        #return cherrypy.session['mystring']
-        return my_car.get_steering_direction()
+        return cherrypy.session['motor_direction']
 
-    def POST(self, steering_directon):
-        cherrypy.session['steering_directon'] = steering_direction
-        return ""
+    def POST(self, motor_direction):
+        cherrypy.session['motor_direction'] = motor_direction
+        my_car.set_motor_direction = motor_direction
+        return motor_direction
 
 if __name__ == '__main__':
     conf = {
