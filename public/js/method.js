@@ -1,19 +1,33 @@
 $(document).ready(function() {
-  $("#up")
-    .mousedown(function() {
-      $("#motor_direction").val("FORWARD");
+  $("#forward")
+    .mousedown(function(e) {
+      $.post("/command", {"motor_direction": "FORWARD"})
+        .done(function() {
+          $("#motor_direction").val("FORWARD");
+        })
     })
     .mouseup(function() {
-      $("#motor_direction").val("NONE");
-    });
+      $.post("/command", {"motor_direction": "NONE"})
+        .done(function() {
+          $("#motor_direction").val("NONE");
+        })
+    })
+  ;
 
-  $("#down")
-    .mousedown(function() {
-      $("#motor_direction").val("REVERSE");
+  $("#reverse")
+    .mousedown(function(e) {
+      $.post("/command", {"motor_direction": "REVERSE"})
+        .done(function() {
+          $("#motor_direction").val("REVERSE");
+        })
     })
     .mouseup(function() {
-      $("#motor_direction").val("NONE");
-    });
+      $.post("/command", {"motor_direction": "NONE"})
+        .done(function() {
+          $("#motor_direction").val("NONE");
+        })
+    })
+  ;
 
 /*
   $("#left")

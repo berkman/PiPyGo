@@ -1,5 +1,4 @@
 import os, os.path
-import random
 import string
 
 from classes.car import Car
@@ -21,7 +20,8 @@ class PiPyGoWebService(object):
 
     def POST(self, motor_direction):
         cherrypy.session['motor_direction'] = motor_direction
-        my_car.set_motor_direction = motor_direction
+        self.my_car.set_motor_direction = motor_direction
+
         return motor_direction
 
 if __name__ == '__main__':
@@ -41,5 +41,8 @@ if __name__ == '__main__':
         }
     }
     webapp = PiPyGo()
-    webapp.generator = PiPyGoWebService()
+    webapp.command = PiPyGoWebService()
     cherrypy.quickstart(webapp, '/', conf)
+
+    #cherrypy.engine.start()
+    #cherrypy.engine.block()
