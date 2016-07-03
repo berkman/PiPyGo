@@ -5,14 +5,15 @@ from classes.car import Car
 
 import cherrypy
 
+my_car = Car()
+
 class PiPyGo(object):
     @cherrypy.expose
     def index(self):
         return open('index.html')
 
-class PiPyGoWebService(object):
+class DriveWebService(object):
     exposed = True
-    my_car = Car()
 
     @cherrypy.tools.accept(media='text/plain')
     def GET(self):
@@ -20,9 +21,20 @@ class PiPyGoWebService(object):
 
     def POST(self, motor_direction):
         cherrypy.session['motor_direction'] = motor_direction
-        self.my_car.set_motor_direction = motor_direction
-
+        #self.my_car.set_motor_direction = motor_direction
         return motor_direction
+
+class SteerWebService(object):
+    exposed = True
+
+    @cherrypy.tools.accept(media='text/plain')
+    def GET(self):
+        return cherrypy.session['steering_direction']
+
+    def POST(self, steering_direction):
+        cherrypy.session['steering_direction'] = steering_direction
+        #self.my_car.set_steering_direction = steering_direction
+        return steering_direction
 
 if __name__ == '__main__':
     conf = {
@@ -35,14 +47,17 @@ if __name__ == '__main__':
             'tools.response_headers.on': True,
             'tools.response_headers.headers': [('Content-Type', 'text/plain')],
         },
+        '/steer': {
+            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+            'tools.response_headers.on': True,
+            'tools.response_headers.headers': [('Content-Type', 'text/plain')],
+        },
         '/static': {
             'tools.staticdir.on': True,
             'tools.staticdir.dir': './public'
         }
     }
     webapp = PiPyGo()
-    webapp.drive = PiPyGoWebService()
+    webapp.drive = DriveWebService()
+    webapp.steer = SteerWebService()
     cherrypy.quickstart(webapp, '/', conf)
-
-    #cherrypy.engine.start()
-    #cherrypy.engine.block()

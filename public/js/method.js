@@ -28,24 +28,38 @@ $(document).ready(function() {
         })
     })
   ;
-});
-/*
+
   $("#left")
-    .mousedown(function() {
-      $("#status").val("LEFT");
+    .mousedown(function(e) {
+      $.post("/steer", {"steering_direction": "LEFT"})
+        .done(function() {
+          $("#steering_direction").val("LEFT");
+        })
     })
     .mouseup(function() {
-      $("#status").val("CENTER");
-    });
+      $.post("/steer", {"steering_direction": "NONE"})
+        .done(function() {
+          $("#steering_direction").val("NONE");
+        })
+    })
+  ;
 
   $("#right")
-    .mousedown(function() {
-      $("#status").val("RIGHT");
+    .mousedown(function(e) {
+      $.post("/steer", {"steering_direction": "RIGHT"})
+        .done(function() {
+          $("#steering_direction").val("RIGHT");
+        })
     })
     .mouseup(function() {
-      $("#status").val("CENTER");
-    });
-
+      $.post("/steer", {"steering_direction": "NONE"})
+        .done(function() {
+          $("#steering_direction").val("NONE");
+        })
+    })
+  ;
+});
+/*
     $(document).keydown(function(e) {
       switch(e.which) {
           case 37: // left
