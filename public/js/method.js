@@ -1,13 +1,13 @@
 $(document).ready(function() {
   $("#forward")
     .mousedown(function(e) {
-      $.post("/command", {"motor_direction": "FORWARD"})
+      $.post("/drive", {"motor_direction": "FORWARD"})
         .done(function() {
           $("#motor_direction").val("FORWARD");
         })
     })
     .mouseup(function() {
-      $.post("/command", {"motor_direction": "NONE"})
+      $.post("/drive", {"motor_direction": "NONE"})
         .done(function() {
           $("#motor_direction").val("NONE");
         })
@@ -16,19 +16,19 @@ $(document).ready(function() {
 
   $("#reverse")
     .mousedown(function(e) {
-      $.post("/command", {"motor_direction": "REVERSE"})
+      $.post("/drive", {"motor_direction": "REVERSE"})
         .done(function() {
           $("#motor_direction").val("REVERSE");
         })
     })
     .mouseup(function() {
-      $.post("/command", {"motor_direction": "NONE"})
+      $.post("/drive", {"motor_direction": "NONE"})
         .done(function() {
           $("#motor_direction").val("NONE");
         })
     })
   ;
-
+});
 /*
   $("#left")
     .mousedown(function() {
@@ -69,13 +69,3 @@ $(document).ready(function() {
       e.preventDefault(); // prevent the default action (scroll / move caret)
     });
   */
-});
-
-/*
-$.post("/command", {"length": $("input[name='length']").val()})
- .done(function(string) {
-    $("#the-string").show();
-    $("#the-string input").val(string);
- });
-e.preventDefault();
-*/

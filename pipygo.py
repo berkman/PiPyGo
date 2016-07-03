@@ -30,7 +30,7 @@ if __name__ == '__main__':
             'tools.sessions.on': True,
             'tools.staticdir.root': os.path.abspath(os.getcwd())
         },
-        '/command': {
+        '/drive': {
             'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
             'tools.response_headers.on': True,
             'tools.response_headers.headers': [('Content-Type', 'text/plain')],
@@ -41,7 +41,7 @@ if __name__ == '__main__':
         }
     }
     webapp = PiPyGo()
-    webapp.command = PiPyGoWebService()
+    webapp.drive = PiPyGoWebService()
     cherrypy.quickstart(webapp, '/', conf)
 
     #cherrypy.engine.start()
