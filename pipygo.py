@@ -60,4 +60,6 @@ if __name__ == '__main__':
     webapp = PiPyGo()
     webapp.drive = DriveWebService()
     webapp.steer = SteerWebService()
+
+    cherrypy.config.update({'server.socket_host': '0.0.0.0'})
     cherrypy.quickstart(webapp, '/', conf)
