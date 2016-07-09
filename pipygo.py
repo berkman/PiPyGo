@@ -8,7 +8,7 @@ my_car = Car()
 class PiPyGo(object):
     @cherrypy.expose
     def index(self):
-        return open('index.html')
+        return open('/Users/mberkman/index.html')
 
 class DriveWebService(object):
     exposed = True
