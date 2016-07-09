@@ -1,11 +1,7 @@
-import json
-import uuid
-import os
-
-from classes.car import Car
-
 import cherrypy
 from cherrypy.process.plugins import Daemonizer
+import os
+from classes.car import Car
 
 my_car = Car()
 
@@ -18,18 +14,7 @@ class DriveWebService(object):
     exposed = True
 
     @cherrypy.tools.accept(media='text/plain')
-    #@cherrypy.tools.json_out()
     def GET(self):
-        '''
-        response = {
-            'request_tag':  str(uuid.uuid1()),
-            'one':          'one',
-            'two':          'two'
-        }
-
-        response = json.dumps(response)
-        cherrypy.log(response)
-        '''
         return cherrypy.session['motor_direction']
 
     def POST(self, motor_direction):
@@ -50,7 +35,7 @@ class SteerWebService(object):
         return steering_direction
 
 if __name__ == '__main__':
-    config_file = "/apps/config/app.conf"
+    config_file = "config/app.conf"
     cherrypy.log("Config File: %s" % config_file)
 
     d = Daemonizer(cherrypy.engine)
