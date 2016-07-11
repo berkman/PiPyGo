@@ -1,12 +1,36 @@
 import cherrypy
 from cherrypy.process.plugins import Daemonizer
 import os
+from Adafruit_MotorHAT import Adafruit_MotorHAT, Adafruit_DCMotor
+import time
+import atexit
 from classes.car import Car
 
 my_car = Car()
 
+
+#TODO move to car class?
+# create a default object, no changes to I2C address or frequency
+mh = Adafruit_MotorHAT(addr=0x60)
+myMotor = mh.getMotor(3)
+
+
+
+
+
 class PiPyGo(object):
     @cherrypy.expose
+
+    #TODO move to car class?
+    # recommended for auto-disabling motors on shutdown!
+    def turnOffMotors():
+    	mh.getMotor(1).run(Adafruit_MotorHAT.RELEASE)
+    	mh.getMotor(2).run(Adafruit_MotorHAT.RELEASE)
+    	mh.getMotor(3).run(Adafruit_MotorHAT.RELEASE)
+    	mh.getMotor(4).run(Adafruit_MotorHAT.RELEASE)
+
+    atexit.register(turnOffMotors)
+
     def index(self):
         return open('/Users/mberkman/index.html')
 
@@ -19,6 +43,19 @@ class DriveWebService(object):
 
     def POST(self, motor_direction):
         cherrypy.session['motor_direction'] = motor_direction
+
+        #TODO move to car class?
+        #print "Forward!"
+        #myMotor.run(Adafruit_MotorHAT.FORWARD)
+        #myMotor.setSpeed(255)
+
+        #print "Backward!"
+        #myMotor.run(Adafruit_MotorHAT.BACKWARD)
+        #myMotor.setSpeed(255)
+
+        #print "Release"
+        #myMotor.run(Adafruit_MotorHAT.RELEASE)
+
         #self.my_car.set_motor_direction = motor_direction
         return motor_direction
 
@@ -38,8 +75,8 @@ if __name__ == '__main__':
     config_file = "config/app.conf"
     cherrypy.log("Config File: %s" % config_file)
 
-    d = Daemonizer(cherrypy.engine)
-    d.subscribe()
+    #d = Daemonizer(cherrypy.engine)
+    #d.subscribe()
 
     webapp = PiPyGo()
     webapp.drive = DriveWebService()
