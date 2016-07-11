@@ -10,6 +10,8 @@ class PiPyGo(object):
     def index(self):
         return open('index.html')
 
+    # atexit.register(my_car.turn_off_motors())
+
 
 class DriveWebService(object):
     exposed = True
