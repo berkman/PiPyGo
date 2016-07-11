@@ -1,8 +1,7 @@
 import cherrypy
 # from cherrypy.process.plugins import Daemonizer
 from classes.car import Car
-
-my_car = Car()
+import atexit
 
 
 class PiPyGo(object):
@@ -10,11 +9,11 @@ class PiPyGo(object):
     def index(self):
         return open('index.html')
 
-    # atexit.register(my_car.turn_off_motors())
-
 
 class DriveWebService(object):
     exposed = True
+
+    my_car = Car()
 
     @cherrypy.tools.accept(media='text/plain')
     def GET(self):
@@ -23,8 +22,10 @@ class DriveWebService(object):
 
     def POST(self, motor_direction):
         cherrypy.session['motor_direction'] = motor_direction
-        # self.my_car.set_motor_direction = motor_direction
+        self.my_car.set_motor_direction(motor_direction)
         return motor_direction
+
+    atexit.register(my_car.turn_off_motors())
 
 
 class SteerWebService(object):

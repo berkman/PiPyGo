@@ -1,5 +1,6 @@
 from Adafruit_MotorHAT import Adafruit_MotorHAT
 import atexit
+import time
 
 
 class Car(object):
@@ -12,9 +13,9 @@ class Car(object):
     mh = Adafruit_MotorHAT(addr=0x60)
 
     STEERING_DIRECTIONS = ['LEFT', 'RIGHT', 'RELEASE']
-    MOTOR_DIRECTIONS = ['FORWARD', 'BACKWARD', 'RELEASE']
+    MOTOR_DIRECTIONS = ['FORWARD', 'REVERSE', 'NONE']
 
-    def __init__(self, steering_direction='NONE', motor_direction='NONE', drive_motor=mh.getMotor(3), steer_motor=mh.getMotor(4)):
+    def __init__(self, steering_direction='RELEASE', motor_direction='NONE', drive_motor=mh.getMotor(1), steer_motor=mh.getMotor(2)):
         self.steering_direction = steering_direction
         self.motor_direction = motor_direction
         self.drive_motor = drive_motor
@@ -33,11 +34,17 @@ class Car(object):
             raise ValueError('Invalid Steering Direction')
 
     def set_motor_direction(self, motor_direction):
-        if motor_direction in self.MOTOR_DIRECTIONS:
-            self.motor_direction = motor_direction
+        self.drive_motor.setSpeed(50)
 
-            drive_motor.run(Adafruit_MotorHAT[motor_direction])
-            drive_motor.setSpeed(255)
+        if motor_direction == 'FORWARD':
+            self.motor_direction = motor_direction
+            self.drive_motor.run(Adafruit_MotorHAT.FORWARD)
+        elif motor_direction == 'REVERSE':
+            self.motor_direction = motor_direction
+            self.drive_motor.run(Adafruit_MotorHAT.BACKWARD)
+        elif motor_direction == 'NONE':
+            self.motor_direction = motor_direction
+            self.drive_motor.run(Adafruit_MotorHAT.RELEASE)
         else:
             raise ValueError('Invalid Motor Direction')
 
