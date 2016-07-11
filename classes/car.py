@@ -1,44 +1,49 @@
+from Adafruit_MotorHAT import Adafruit_MotorHAT
+import atexit
+
+
 class Car(object):
-	steering_direction = None
-	motor_direction = None
-	#pedal_engaged = False
-	#steering_engaged = False
+    steering_direction = None
+    motor_direction = None
 
-	STEERING_DIRECTIONS = ['LEFT', 'RIGHT', 'NONE']
-	MOTOR_DIRECTIONS = ['FORWARD', 'REVERSE', 'NONE']
-	#CAMERA_STATES = ['OFF', 'STREAM', 'PICTURE', 'VIDEO']
-	#MUSIC_STATES = ['OFF', 'ON']
+    # create a default object, no changes to I2C address or frequency
+    mh = Adafruit_MotorHAT(addr=0x60)
+    myDriveMotor = mh.getMotor(3)
+    mySteerMotor = mh.getMotor(4)
 
-	def __init__(self, steering_direction='NONE', motor_direction='NONE'):
-		self.steering_direction = steering_direction
-		self.motor_direction = motor_direction
+    STEERING_DIRECTIONS = ['LEFT', 'RIGHT', 'NONE']
+    MOTOR_DIRECTIONS = ['FORWARD', 'REVERSE', 'NONE']
 
-	def get_steering_direction(self):
-		return self.steering_direction
+    def __init__(self, steering_direction='NONE', motor_direction='NONE'):
+        self.steering_direction = steering_direction
+        self.motor_direction = motor_direction
 
-	def get_motor_direction(self):
-		return self.motor_direction
+    def get_steering_direction(self):
+        return self.steering_direction
 
-	#def get_pedal_engaged(self):
-	#	return self.pedal_engaged
+    def get_motor_direction(self):
+        return self.motor_direction
 
-	#def get_steering_engaged(self):
-	#	return self.steering_engaged
+    def set_steering_direction(self, steering_direction):
+        if steering_direction in self.STEERING_DIRECTIONS:
+            self.steering_direction = steering_direction
+        else:
+            raise ValueError('Invalid Steering Direction')
 
-	def set_steering_direction(self, steering_direction):
-		if steering_direction in self.STEERING_DIRECTIONS:
-			self.steering_direction = steering_direction
-		else:
-			raise ValueError('Invalid Steering Direction')
+    def set_motor_direction(self, motor_direction):
+        if motor_direction in self.MOTOR_DIRECTIONS:
+            self.motor_direction = motor_direction
+        else:
+            raise ValueError('Invalid Motor Direction')
 
-	def set_motor_direction(self, motor_direction):
-		if motor_direction in self.MOTOR_DIRECTIONS:
-			self.motor_direction = motor_direction
-		else:
-			raise ValueError('Invalid Motor Direction')
+        # myDriveMotor.run(Adafruit_MotorHAT.FORWARD)
+        # myDriveMotor.setSpeed(255)
+        # myDriveMotor.run(Adafruit_MotorHAT.BACKWARD)
+        # myDriveMotor.run(Adafruit_MotorHAT.RELEASE)
 
-	#def set_pedal_engaged(self, pedal_engaged):
-	#	self.pedal_engaged = pedal_engaged
+    # recommended for auto-disabling motors on shutdown!
+    def turn_off_motors():
+        self.myDriveMotor.run(Adafruit_MotorHAT.RELEASE)
+        self.mySteerMotor.run(Adafruit_MotorHAT.RELEASE)
 
-	#def set_steering_engaged(self, steering_engaged):
-	#	self.steering_engaged = steering_engaged
+    atexit.register(turn_off_motors)
