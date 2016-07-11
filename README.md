@@ -7,7 +7,13 @@
 Pending
 
 ### Setup
-Pending
+1. Pi setup
+2. Python stuffs
+3. Nginx
+4. The car itself
+
+### Future Plans/Additions
+TBD
 
 ### Resources
 1. [CherryPy](http://docs.cherrypy.org/en/latest/basics.html)
