@@ -13,7 +13,9 @@ Pending
 4. The car itself
 
 ### Future Plans/Additions
-TBD
+1. Pi AP
+2. Bluetooth Controller
+3. Mobile App
 
 ### Resources
 1. [CherryPy](http://docs.cherrypy.org/en/latest/basics.html)

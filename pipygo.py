@@ -17,13 +17,11 @@ class DriveWebService(object):
 
     @cherrypy.tools.accept(media='text/plain')
     def GET(self):
-        # TODO: do we want to use sessions?
-        return cherrypy.session['motor_direction']
+        return my_car.get_drive_direction
 
-    def POST(self, motor_direction):
-        cherrypy.session['motor_direction'] = motor_direction
-        self.my_car.set_motor_direction(motor_direction)
-        return motor_direction
+    def POST(self, drive_direction):
+        self.my_car.set_drive_direction(drive_direction)
+        return drive_direction
 
     atexit.register(my_car.turn_off_motors())
 
