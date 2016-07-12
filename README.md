@@ -16,6 +16,7 @@ Pending
 1. Pi AP
 2. Bluetooth Controller
 3. Mobile App
+4. Safe shutdown of devices
 
 ### Resources
 1. [CherryPy](http://docs.cherrypy.org/en/latest/basics.html)

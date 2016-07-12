@@ -23,19 +23,17 @@ class DriveWebService(object):
         self.my_car.set_drive_direction(drive_direction)
         return drive_direction
 
-    atexit.register(my_car.turn_off_motors())
-
 
 class SteerWebService(object):
     exposed = True
 
     @cherrypy.tools.accept(media='text/plain')
     def GET(self):
-        return cherrypy.session['steering_direction']
+        pass
+        # my_car.get_steering_direction
 
     def POST(self, steering_direction):
-        cherrypy.session['steering_direction'] = steering_direction
-        # self.my_car.set_steering_direction = steering_direction
+        # self.my_car.set_steering_direction(steering_direction)
         return steering_direction
 
 if __name__ == '__main__':
