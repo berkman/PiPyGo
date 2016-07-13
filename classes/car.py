@@ -28,7 +28,17 @@ class Car(object):
         return self.steering_direction
 
     def set_steering_direction(self, steering_direction):
-        pass
+        self.steering_direction = steering_direction
+        self.steering_motor.setSpeed(100)
+
+        if steering_direction == 'RIGHT':
+            self.steering_motor.run(Adafruit_MotorHAT.FORWARD)
+        elif steering_direction == 'LEFT':
+            self.steering_motor.run(Adafruit_MotorHAT.BACKWARD)
+        else:
+            self.steering_motor.run(Adafruit_MotorHAT.RELEASE)
+
+        time.sleep(.5)
 
     def get_drive_direction(self):
         return self.drive_direction
